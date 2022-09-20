@@ -103,7 +103,7 @@ export default function Addliquidity() {
       const twoX192 = BigNumber.from(2).pow(96);
 
       try {
-        const poolCurrentprice = await poolInst.price();
+        const poolCurrentprice = (await poolInst.getPriceAndNearestTicks())._price;
         console.log(poolCurrentprice.toString());
         const currentprice = await tridentMathInst.priceFromSqrtprice(
           twoX192.toString(),
@@ -156,8 +156,8 @@ export default function Addliquidity() {
         signer
       );
 
-      const tickSpacing = await poolInst.tickSpacing();
-      const price = await poolInst.price();
+      const tickSpacing = (await poolInst.getImmutables())._tickSpacing;
+      const price = (await poolInst.getPriceAndNearestTicks())._price;
       const tickAtPrice = await TickMathContract.getTickAtSqrtRatio(price);
       console.log(tickAtPrice, price.toString());
       const nearestValidTick = tickAtPrice - (tickAtPrice % tickSpacing);
@@ -214,8 +214,8 @@ export default function Addliquidity() {
       //   _masterDeployer,
       //   _token0,
       //   _token1}=await poolInst.getImmutables()
-      const _token0 = await poolInst.token0();
-      const _token1 = await poolInst.token1();
+      const _token0 = (await poolInst.getImmutables())._token0;
+      const _token1 = (await poolInst.getImmutables())._token1;
       const tokenAInst = new ethers.Contract(_token0, erc20TokenAbi, signer);
       const tokenBInst = new ethers.Contract(_token1, erc20TokenAbi, signer);
       const vaultInst = new ethers.Contract(Vault, vaultAbi, signer);
@@ -243,7 +243,7 @@ export default function Addliquidity() {
     if (active) {
       const signer = provider.getSigner();
       const poolInst = new ethers.Contract(pool, poolAbi, signer);
-      const _tickSpacing = await poolInst.tickSpacing();
+      const _tickSpacing = (await poolInst.getImmutables())._tickSpacing;
       const tickMathInst = new ethers.Contract(TickMath, tickMathAbi, signer);
       const tridentMathInst = new ethers.Contract(
         TridentMath,
@@ -253,7 +253,7 @@ export default function Addliquidity() {
 
       const twoX192 = BigNumber.from(2).pow(96);
       //Fetching current Pool Price
-      const poolCurrentprice = await poolInst.price();
+      const poolCurrentprice = (await poolInst.getPriceAndNearestTicks())._price;
       const tickAtPrice = await tickMathInst.getTickAtSqrtRatio(
         poolCurrentprice
       );
@@ -382,7 +382,7 @@ export default function Addliquidity() {
       );
       const poolInst = new ethers.Contract(pool, poolAbi, signer);
 
-      const tick = await poolInst.nearestTick();
+      const tick = (await poolInst.getPriceAndNearestTicks())._nearestTick;
       const tokenXamount = getBigNumber(token0Amount.toString());
       const tokenYamount = getBigNumber(token1Amount.toString());
       console.log("pool", pool);

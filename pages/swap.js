@@ -65,7 +65,7 @@ export default function Swap() {
       const poolInst = new ethers.Contract(pool, poolAbi, signer);
       const 
         _token0
-        = await poolInst.token0();
+        = (await poolInst.getImmutables())._token0;
 
       const tokenAInst = new ethers.Contract(_token0, erc20TokenAbi, signer);
       const vaultInst = new ethers.Contract(Vault, vaultAbi, signer);
@@ -136,7 +136,7 @@ export default function Swap() {
       const poolInst = new ethers.Contract(pool, poolAbi, signer);
       const 
       _token0
-      = await poolInst.token0();
+      = (await poolInst.getImmutables())._token0;
       console.log("account Address", accountAddress);
       console.log("inAmount", getBigNumber(inAmount));
       try {
@@ -165,7 +165,7 @@ export default function Swap() {
       const poolInst = new ethers.Contract(pool, poolAbi, signer);
       const 
         _token1
-        = await poolInst.token1();
+        = (await poolInst.getImmutables())._token1;
       let token;
       console.log("account Address", accountAddress);
       console.log("inAmount", getBigNumber(inAmount));
@@ -194,7 +194,7 @@ export default function Swap() {
       const poolInst = new ethers.Contract(pool, poolAbi, signer);
       const 
         _token0
-        = await poolInst.token0();
+        = (await poolInst.getImmutables())._token0;
       let token;
       let zeroForOne=true;
       const deployData = await ethers.utils.defaultAbiCoder.encode(
@@ -227,7 +227,7 @@ export default function Swap() {
       const poolInst = new ethers.Contract(pool, poolAbi, signer);
       const 
         _token1
-        = await poolInst.token1();
+        = (await poolInst.getImmutables())._token1;
       const zeroForOne=false;
       const deployData = await ethers.utils.defaultAbiCoder.encode(
         ["bool", "address", "bool"],
