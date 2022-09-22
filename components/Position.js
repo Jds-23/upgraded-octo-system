@@ -74,7 +74,7 @@ const Position = ({tokenId}) => {
           );
     
           const liquidityAmount=(await poolManagerInst.positions(tokenId)).liquidity
-          console.log(await poolManagerInst.positions(tokenId))
+          console.log(await poolManagerInst.positions(tokenId),tokenId)
           await poolManagerInst.burn(tokenId, liquidityAmount, account, true, 0, 0)
         }
       }

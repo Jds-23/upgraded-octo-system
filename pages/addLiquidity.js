@@ -408,9 +408,9 @@ export default function Addliquidity() {
         signer
       );
 
-      const liquidityAmount=(await poolManagerInst.positions(2)).liquidity
-      console.log(await poolManagerInst.positions(2))
-      await poolManagerInst.burn(2, liquidityAmount, account, true, 0, 0)
+      const liquidityAmount=(await poolManagerInst.positions(3)).liquidity
+      console.log(await poolManagerInst.positions(3))
+      await poolManagerInst.burn(3, liquidityAmount.div(2), account, true, 0, 0)
     }
   }
   async function collectFee(){

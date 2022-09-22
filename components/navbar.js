@@ -75,6 +75,11 @@ export default function Navbar() {
                 <a className="nav-link">Token Faucet</a>
               </Link>
             </li>
+            <li className="nav-item">
+              <Link href="/manageLiquidity">
+                <a className="nav-link">Manage Liquidity</a>
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
