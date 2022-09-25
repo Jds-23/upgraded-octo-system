@@ -80,6 +80,16 @@ export default function Navbar() {
                 <a className="nav-link">Manage Liquidity</a>
               </Link>
             </li>
+            <li className="nav-item">
+              <Link href="/manageLimitOrders">
+                <a className="nav-link">Manage Limit Order</a>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link href="/limitOrder">
+                <a className="nav-link">Limit Order</a>
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

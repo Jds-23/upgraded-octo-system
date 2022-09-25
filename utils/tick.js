@@ -120,3 +120,33 @@ export function findLowerValidTick(tick,tickSpacing){
     }   
 
 
+    export function findUpperAndLower(sortedArray, tick) {
+      const b = sortedArray.indexOf(tick);
+      const len = sortedArray.length;
+      let upper;
+      let lower;
+      if (b == -1) {
+        upper = findClosest(sortedArray, tick);
+        let up = sortedArray.indexOf(upper);
+        if (up + 1 > len - 1) {
+          upper = sortedArray[up];
+        } else {
+          upper = sortedArray[up + 1];
+        }
+        let lw = sortedArray.indexOf(upper);
+        lower = sortedArray[lw - 1];
+      } else {
+        if (b + 1 > len - 1) {
+          upper = sortedArray[b];
+        } else {
+          upper = sortedArray[b + 1];
+        }
+        if (b - 1 < 0) {
+          lower = sortedArray[b];
+        } else {
+          lower = sortedArray[b - 1];
+        }
+      }
+      return { upper, lower };
+    }
+    

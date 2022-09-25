@@ -137,16 +137,10 @@ export default function Addliquidity() {
   useEffect(() => {
     if (pool !== "") {
       getPrice();
-      getLiquidityNft()
     }
   }, [pool]);
  
-  async function getLiquidityNft(){
-    // alchemy.nft.getNftsForContract(Manager).then(res=>console.log(res))
-    alchemy.nft.getNftsForOwner(account,{
-      contractAddresses:[Manager]
-    }).then(res=>console.log(setLiquidityPositions(res)))
-  }
+ 
   async function getPool() {
     if (active) {
       const signer = provider.getSigner();
