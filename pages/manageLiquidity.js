@@ -13,7 +13,7 @@ import {
   MasterDeployer,
   factory,
   Vault,
-  Manager,
+  PoolManager,
   TickMath,
   TridentMath,
   PoolHelper,
@@ -80,7 +80,7 @@ export default function Addliquidity() {
   async function getLiquidityNft(){
     // alchemy.nft.getNftsForContract(Manager).then(res=>console.log(res))
     alchemy.nft.getNftsForOwner(account,{
-      contractAddresses:[Manager]
+      contractAddresses:[PoolManager]
     }).then(res=>console.log(setLiquidityPositions(res.ownedNfts)))
   }
   

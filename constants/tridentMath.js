@@ -21,25 +21,6 @@ module.exports={
             "type": "uint160"
           }
         ],
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "uint256",
-            "name": "x",
-            "type": "uint256"
-          }
-        ],
-        "name": "sqrt",
-        "outputs": [
-          {
-            "internalType": "uint256",
-            "name": "z",
-            "type": "uint256"
-          }
-        ],
         "stateMutability": "pure",
         "type": "function"
       },
@@ -64,7 +45,7 @@ module.exports={
             "type": "uint160"
           }
         ],
-        "stateMutability": "view",
+        "stateMutability": "pure",
         "type": "function"
       }
     ],

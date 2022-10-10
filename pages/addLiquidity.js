@@ -13,7 +13,7 @@ import {
   MasterDeployer,
   factory,
   Vault,
-  Manager,
+  PoolManager,
   TickMath,
   TridentMath,
   PoolHelper,
@@ -216,16 +216,19 @@ export default function Addliquidity() {
       const vaultInst = new ethers.Contract(Vault, vaultAbi, signer);
       // debugger
       try {
-        await tokenAInst.approve(Vault, getBigNumber(token0Amount));
-        await tokenBInst.approve(Vault, getBigNumber(token1Amount));
-        await vaultInst.setMasterContractApproval(
-          accountAddress,
-          Manager,
-          true,
-          "0",
-          "0x0000000000000000000000000000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000000000000000000000000000"
+      let tx=  await tokenAInst.approve(Vault, getBigNumber(token0Amount));
+      await tx.wait()
+      tx=  await tokenBInst.approve(Vault, getBigNumber(token1Amount));
+      await tx.wait()
+      tx=  await vaultInst.setMasterContractApproval(
+        accountAddress,
+        PoolManager,
+        true,
+        "0",
+        "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "0x0000000000000000000000000000000000000000000000000000000000000000"
         );
+        await tx.wait()
       } catch (error) {
         console.log(error);
       }
@@ -238,7 +241,7 @@ export default function Addliquidity() {
     if (active) {
       const signer = provider.getSigner();
       const poolManagerInst = new ethers.Contract(
-        Manager,
+        PoolManager,
         poolManagerAbi,
         signer
       );
@@ -257,7 +260,7 @@ export default function Addliquidity() {
       );
       try {
         const twoX192 = BigNumber.from(2).pow(96);
-        //Fetching current Pool Price
+        // Fetching current Pool Price
         // const poolCurrentprice = await poolInst.price();
         // const tickAtPrice = await tickMathInst.getTickAtSqrtRatio(
         //   poolCurrentprice
@@ -397,7 +400,7 @@ export default function Addliquidity() {
     if (active) {
       const signer = provider.getSigner();
       const poolManagerInst = new ethers.Contract(
-        Manager,
+        PoolManager,
         poolManagerAbi,
         signer
       );
@@ -411,7 +414,7 @@ export default function Addliquidity() {
     if (active) {
       const signer = provider.getSigner();
       const poolManagerInst = new ethers.Contract(
-        Manager,
+        PoolManager,
         poolManagerAbi,
         signer
       );
@@ -566,28 +569,7 @@ export default function Addliquidity() {
               ) : (
                 ""
               )}
-              {active ? (
-                 <button
-                 type="button"
-                 className="btn btn-primary btn-space"
-                 onClick={() => burn()}
-               >
-                 Remove Liquidity
-               </button>
-              ) : (
-                ""
-              )}
-              {active ? (
-                 <button
-                 type="button"
-                 className="btn btn-primary btn-space"
-                 onClick={() => collectFee()}
-               >
-                 Collect Fee
-               </button>
-              ) : (
-                ""
-              )}
+              
               {/* {active ? (
                 <button
                   type="button"

@@ -11,6 +11,16 @@ module.exports={
           "internalType": "contract IMasterDeployer",
           "name": "_masterDeployer",
           "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_limitOrderManager",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_factory",
+          "type": "address"
         }
       ],
       "stateMutability": "nonpayable",
@@ -18,12 +28,12 @@ module.exports={
     },
     {
       "inputs": [],
-      "name": "InvalidLimitOrderFee",
+      "name": "InvalidFee",
       "type": "error"
     },
     {
       "inputs": [],
-      "name": "InvalidSwapFee",
+      "name": "InvalidLimitOrderFee",
       "type": "error"
     },
     {
@@ -54,6 +64,11 @@ module.exports={
     {
       "inputs": [],
       "name": "MaxTickLiquidity",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "OnlyLimitOrderManager",
       "type": "error"
     },
     {
@@ -238,25 +253,6 @@ module.exports={
       ],
       "name": "SwapFeeUpdated",
       "type": "event"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "token",
-          "type": "address"
-        }
-      ],
-      "name": "_balance",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "balance",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
     },
     {
       "inputs": [
@@ -638,6 +634,19 @@ module.exports={
     },
     {
       "inputs": [],
+      "name": "limitOrderManager",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
       "name": "limitOrderReserve0",
       "outputs": [
         {
@@ -919,19 +928,6 @@ module.exports={
     },
     {
       "inputs": [],
-      "name": "testvariable",
-      "outputs": [
-        {
-          "internalType": "int24",
-          "name": "",
-          "type": "int24"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
       "name": "tickCount",
       "outputs": [
         {
@@ -1014,13 +1010,6 @@ module.exports={
       "type": "function"
     },
     {
-      "inputs": [],
-      "name": "updateBarFee",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
       "inputs": [
         {
           "internalType": "uint24",
@@ -1029,6 +1018,13 @@ module.exports={
         }
       ],
       "name": "updateLimitOrderFee",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "updateProtocolFee",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"

@@ -10,10 +10,12 @@ import {
   MasterDeployer,
   factory,
   Vault,
-  Manager,
+  PoolManager,
+  LimitOrderManager,
   TickMath,
   TridentMath,
   PoolHelper,
+  Router,
 } from "../constants/constants";
 import { poolAbi } from "../constants/pool";
 import { vaultAbi } from "../constants/vault";
@@ -31,6 +33,7 @@ import {
 } from "../utils/tick";
 import { tickMathAbi } from "../constants/tickmath";
 import { poolManagerAbi } from "../constants/poolManager";
+import limitOrderManager, { limitOrderManagerAbi } from "../constants/limitOrderManager";
 import { tridentMathUIAbi } from "../constants/tridentMath";
 import { BigNumber, BigNumberish } from "ethers";
 import { factoryAbi } from "../constants/factory";
@@ -145,9 +148,9 @@ export default function Home() {
         tridentMathUIAbi,
         signer
       );
-      const poolManagerInst = new ethers.Contract(
-        Manager,
-        poolManagerAbi,
+      const limitOrderManagerInst = new ethers.Contract(
+        LimitOrderManager,
+        limitOrderManagerAbi,
         signer
       );
       const poolhelperInst = new ethers.Contract(
@@ -221,7 +224,7 @@ console.log({pool,
   upperOld,
   tokenamountInBigNumber,
   zeroForOne})
-      await poolManagerInst.createLimitOrder(
+      await limitOrderManagerInst.createLimitOrder(
         pool,
         validTick,
         lowerOld,
@@ -248,10 +251,32 @@ console.log({pool,
         await tx.wait();
         tx = await tokenAInst.approve(Vault, getBigNumber(tokenAmount));
         await tx.wait();
+        tx = await tokenAInst.approve(LimitOrderManager, getBigNumber(tokenAmount));
+        await tx.wait();
+        tx = await tokenAInst.approve(PoolManager, getBigNumber(tokenAmount));
+        await tx.wait();
 
         tx = await vaultInst.setMasterContractApproval(
           accountAddress,
           Router,
+          true,
+          "0",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000000000000000000000000000"
+        );
+        await tx.wait();
+        tx = await vaultInst.setMasterContractApproval(
+          accountAddress,
+          LimitOrderManager,
+          true,
+          "0",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000000000000000000000000000"
+        );
+        await tx.wait();
+        tx = await vaultInst.setMasterContractApproval(
+          accountAddress,
+          PoolManager,
           true,
           "0",
           "0x0000000000000000000000000000000000000000000000000000000000000000",
@@ -281,10 +306,33 @@ async function approveToken1() {
         await tx.wait();
         tx = await tokenBInst.approve(Vault, getBigNumber(tokenAmount));
         await tx.wait();
+        tx = await tokenBInst.approve(LimitOrderManager, getBigNumber(tokenAmount));
+        await tx.wait();
+        tx = await tokenAInst.approve(PoolManager, getBigNumber(tokenAmount));
+        await tx.wait();
+
 
         tx = await vaultInst.setMasterContractApproval(
           accountAddress,
           Router,
+          true,
+          "0",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000000000000000000000000000"
+        );
+        await tx.wait();
+        tx = await vaultInst.setMasterContractApproval(
+          accountAddress,
+          LimitOrderManager,
+          true,
+          "0",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000000000000000000000000000"
+        );
+        await tx.wait();
+        tx = await vaultInst.setMasterContractApproval(
+          accountAddress,
+          PoolManager,
           true,
           "0",
           "0x0000000000000000000000000000000000000000000000000000000000000000",

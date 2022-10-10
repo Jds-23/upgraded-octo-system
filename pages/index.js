@@ -76,12 +76,12 @@ export default function Createpool() {
         MasterDeployer,
         masterDeployerAbi,
         signer
-      );
-      let sqrtprice = TWO_POW_96.mul(price);
-      const deployData = await ethers.utils.defaultAbiCoder.encode(
-        ["address", "address", "uint24", "uint160", "uint24"],
-        [tokenB, tokenA, fee, sqrtprice, tickSpacing]
-      );
+        );
+        let sqrtprice = TWO_POW_96.mul(price);
+        const deployData = await ethers.utils.defaultAbiCoder.encode(
+          ["address", "address", "uint160", "uint24"],
+          [tokenB, tokenA, sqrtprice, tickSpacing]
+          );
       try {
         await masterDeployer.deployPool(factory, deployData);
       } catch (error) {
@@ -203,6 +203,9 @@ export default function Createpool() {
             </form>
             <div>
               <button onClick={() => getPool()}>Get Pools</button>
+            </div>
+            <div>
+              <button onClick={() => whitelisting()}>whitelist</button>
             </div>
           </div>
         </div>

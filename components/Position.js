@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 import React, { useEffect, useState } from 'react'
 import { poolManagerAbi } from "../constants/poolManager";
 import {
-    Manager,
+  PoolManager,
   } from "../constants/constants";
   import { poolAbi } from "../constants/pool";
 import { getEllipsisTxt } from '../utils';
@@ -38,7 +38,7 @@ const Position = ({tokenId}) => {
         if (active) {
           const signer = provider.getSigner();
           const poolManagerInst = new ethers.Contract(
-            Manager,
+            PoolManager,
             poolManagerAbi,
             signer
           );
@@ -68,7 +68,7 @@ const Position = ({tokenId}) => {
         if (active) {
           const signer = provider.getSigner();
           const poolManagerInst = new ethers.Contract(
-            Manager,
+            PoolManager,
             poolManagerAbi,
             signer
           );
@@ -82,7 +82,7 @@ const Position = ({tokenId}) => {
         if (active) {
           const signer = provider.getSigner();
           const poolManagerInst = new ethers.Contract(
-            Manager,
+            PoolManager,
             poolManagerAbi,
             signer
           );

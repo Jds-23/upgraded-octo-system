@@ -33,11 +33,6 @@ module.exports={
       },
       {
         "inputs": [],
-        "name": "InvalidLimitOrderFee",
-        "type": "error"
-      },
-      {
-        "inputs": [],
         "name": "NotWhitelisted",
         "type": "error"
       },
@@ -279,19 +274,6 @@ module.exports={
           }
         ],
         "name": "setDfynFee",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "uint256",
-            "name": "_limitOrderFee",
-            "type": "uint256"
-          }
-        ],
-        "name": "setLimitOrderFee",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
