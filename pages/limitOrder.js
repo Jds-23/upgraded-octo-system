@@ -17,7 +17,7 @@ import {
   PoolHelper,
   Router,
 } from "../constants/constants";
-import { poolAbi } from "../constants/pool";
+import { poolAbi } from "../constants/pool"
 import { vaultAbi } from "../constants/vault";
 import { poolHelperAbi } from "../constants/poolHelper";
 import {
@@ -253,18 +253,18 @@ console.log({pool,
         await tx.wait();
         tx = await tokenAInst.approve(LimitOrderManager, getBigNumber(tokenAmount));
         await tx.wait();
-        tx = await tokenAInst.approve(PoolManager, getBigNumber(tokenAmount));
-        await tx.wait();
+        // tx = await tokenAInst.approve(PoolManager, getBigNumber(tokenAmount));
+        // await tx.wait();
 
-        tx = await vaultInst.setMasterContractApproval(
-          accountAddress,
-          Router,
-          true,
-          "0",
-          "0x0000000000000000000000000000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000000000000000000000000000"
-        );
-        await tx.wait();
+        // tx = await vaultInst.setMasterContractApproval(
+        //   accountAddress,
+        //   Router,
+        //   true,
+        //   "0",
+        //   "0x0000000000000000000000000000000000000000000000000000000000000000",
+        //   "0x0000000000000000000000000000000000000000000000000000000000000000"
+        // );
+        // await tx.wait();
         tx = await vaultInst.setMasterContractApproval(
           accountAddress,
           LimitOrderManager,
@@ -274,15 +274,15 @@ console.log({pool,
           "0x0000000000000000000000000000000000000000000000000000000000000000"
         );
         await tx.wait();
-        tx = await vaultInst.setMasterContractApproval(
-          accountAddress,
-          PoolManager,
-          true,
-          "0",
-          "0x0000000000000000000000000000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000000000000000000000000000"
-        );
-        await tx.wait();
+        // tx = await vaultInst.setMasterContractApproval(
+        //   accountAddress,
+        //   PoolManager,
+        //   true,
+        //   "0",
+        //   "0x0000000000000000000000000000000000000000000000000000000000000000",
+        //   "0x0000000000000000000000000000000000000000000000000000000000000000"
+        // );
+        // await tx.wait();
       } catch (error) {
         console.log(error);
       }
@@ -308,19 +308,19 @@ async function approveToken1() {
         await tx.wait();
         tx = await tokenBInst.approve(LimitOrderManager, getBigNumber(tokenAmount));
         await tx.wait();
-        tx = await tokenAInst.approve(PoolManager, getBigNumber(tokenAmount));
-        await tx.wait();
+        // tx = await tokenBInst.approve(PoolManager, getBigNumber(tokenAmount));
+        // await tx.wait();
 
 
-        tx = await vaultInst.setMasterContractApproval(
-          accountAddress,
-          Router,
-          true,
-          "0",
-          "0x0000000000000000000000000000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000000000000000000000000000"
-        );
-        await tx.wait();
+        // tx = await vaultInst.setMasterContractApproval(
+        //   accountAddress,
+        //   Router,
+        //   true,
+        //   "0",
+        //   "0x0000000000000000000000000000000000000000000000000000000000000000",
+        //   "0x0000000000000000000000000000000000000000000000000000000000000000"
+        // );
+        // await tx.wait();
         tx = await vaultInst.setMasterContractApproval(
           accountAddress,
           LimitOrderManager,
@@ -330,15 +330,15 @@ async function approveToken1() {
           "0x0000000000000000000000000000000000000000000000000000000000000000"
         );
         await tx.wait();
-        tx = await vaultInst.setMasterContractApproval(
-          accountAddress,
-          PoolManager,
-          true,
-          "0",
-          "0x0000000000000000000000000000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000000000000000000000000000"
-        );
-        await tx.wait();
+        // tx = await vaultInst.setMasterContractApproval(
+        //   accountAddress,
+        //   PoolManager,
+        //   true,
+        //   "0",
+        //   "0x0000000000000000000000000000000000000000000000000000000000000000",
+        //   "0x0000000000000000000000000000000000000000000000000000000000000000"
+        // );
+        // await tx.wait();
       } catch (error) {
         console.log(error);
       }
