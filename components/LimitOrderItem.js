@@ -1,13 +1,13 @@
 import { useWeb3React } from '@web3-react/core';
 import { ethers } from 'ethers';
 import React, { useEffect, useState } from 'react'
-import { poolManagerAbi } from "../constants/poolManager";
 import {
-    Manager,
+  LimitOrderManager,
   } from "../constants/constants";
   import { poolAbi } from "../constants/pool";
 import { getEllipsisTxt } from '../utils';
 import { formatEther, parseEther } from 'ethers/lib/utils';
+import { limitOrderManagerAbi } from '../constants/limitOrderManager';
 
 const LimirOrderItem = ({tokenId}) => {
 
@@ -44,16 +44,16 @@ const LimirOrderItem = ({tokenId}) => {
     async function getLimitOrderInfo(){
         if (active) {
          try {const signer = provider.getSigner();
-          const poolManagerInst = new ethers.Contract(
-            Manager,
-            poolManagerAbi,
+          const limitOrderManagerInst = new ethers.Contract(
+            LimitOrderManager,
+            limitOrderManagerAbi,
             signer
           );
 
-          setLimitOrderData(await poolManagerInst.limitOrders(tokenId))
-          console.log(await poolManagerInst.limitOrders(tokenId))
-        //   setLiquidityInfo(await poolManagerInst.positions(tokenId))
-          setPool((await poolManagerInst.limitOrders(tokenId)).pool)}catch(err){
+          setLimitOrderData(await limitOrderManagerInst.limitOrders(tokenId))
+          console.log(await limitOrderManagerInst.limitOrders(tokenId))
+        //   setLiquidityInfo(await limitOrderManagerInst.positions(tokenId))
+          setPool((await limitOrderManagerInst.limitOrders(tokenId)).pool)}catch(err){
             console.log(err)
           }
         }
@@ -91,9 +91,9 @@ const LimirOrderItem = ({tokenId}) => {
       async function claim(){
         if (active&&limitOrderTickData) {
           const signer = provider.getSigner();
-          const poolManagerInst = new ethers.Contract(
-            Manager,
-            poolManagerAbi,
+          const limitOrderManagerInst = new ethers.Contract(
+            LimitOrderManager,
+            limitOrderManagerAbi,
             signer
           );
           let claimParams
@@ -114,18 +114,18 @@ const LimirOrderItem = ({tokenId}) => {
            recipient: account,
          };
     
-          await poolManagerInst.claimLimitOrder(tokenId, claimParams.amountToClaim, true)
+          await limitOrderManagerInst.claimLimitOrder(tokenId, claimParams.amountToClaim, true)
         }
     }
     async function cancel(){
         if(active){
             const signer = provider.getSigner();
-            const poolManagerInst = new ethers.Contract(
-                Manager,
-                poolManagerAbi,
+            const limitOrderManagerInst = new ethers.Contract(
+                LimitOrderManager,
+                limitOrderManagerAbi,
                 signer
                 );
-            await poolManagerInst.cancelLimitOrder(tokenId,  true)
+            await limitOrderManagerInst.cancelLimitOrder(tokenId,  true)
         }
       }
       

@@ -13,7 +13,8 @@ import {
   MasterDeployer,
   factory,
   Vault,
-  Manager,
+  PoolManager,
+  LimitOrderManager,
   TickMath,
   TridentMath,
   PoolHelper,
@@ -34,6 +35,7 @@ import {
 } from "../utils/tick";
 import { tickMathAbi } from "../constants/tickmath";
 import { poolManagerAbi } from "../constants/poolManager";
+import { limitOrderManagerAbi } from "../constants/limitOrderManager";
 import { tridentMathUIAbi } from "../constants/tridentMath";
 import { BigNumber, BigNumberish } from "ethers";
 import { factoryAbi } from "../constants/factory";
@@ -105,11 +107,11 @@ export default function Addliquidity() {
   async function getLimitOrderContract() {
     if (active) {
       const signer = provider.getSigner();
-      const poolManagerInst = new ethers.Contract(
-        Manager,
-        poolManagerAbi,
+      const limitOrderManagerInst = new ethers.Contract(
+        LimitOrderManager,
+        limitOrderManagerAbi,
         signer
-      );      const limitOrderToken=await poolManagerInst.limitOrderToken();
+      );      const limitOrderToken=await limitOrderManagerInst.limitOrderToken();
       try {
         setLimitOrderContract(limitOrderToken);
       } catch (error) {
