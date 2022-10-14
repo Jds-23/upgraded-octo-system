@@ -63,6 +63,7 @@ export default function Addliquidity() {
   );
   const [pool, setPool] = useState("");
   const [currentprice, setCurrentPrice] = useState("");
+  const [nearestTick, setNearestTick] = useState("");
   const [tokenId, setTokenId] = useState("0");
   const [token0Amount, setToken0Amount] = useState("");
   const [token1Amount, setToken1Amount] = useState("");
@@ -168,6 +169,7 @@ export default function Addliquidity() {
 
       try {
         const poolCurrentprice = (await poolInst.getPriceAndNearestTicks())._price;
+        const poolNearestTick = (await poolInst.getPriceAndNearestTicks())._nearestTick;
         console.log(poolCurrentprice.toString());
         const currentprice = await tridentMathInst.priceFromSqrtprice(
           twoX192.toString(),
@@ -175,6 +177,7 @@ export default function Addliquidity() {
         );
         console.log(currentprice.toString());
         setCurrentPrice(currentprice.toString());
+        setNearestTick(poolNearestTick)
       } catch (error) {
         console.log(error);
       }
@@ -286,6 +289,9 @@ export default function Addliquidity() {
           desiredLowerTick,
           _tickSpacing
         );
+        if(parseFloat(lowerValidTick)>parseFloat(nearestTick)){
+          lowerValidTick=nearestTick;
+        }
 
         let lowerValidSqrtPrice = await tickMathInst.getSqrtRatioAtTick(
           lowerValidTick.toString()
@@ -312,6 +318,10 @@ export default function Addliquidity() {
           tickAtUpperPrice,
           _tickSpacing
         );
+
+        if(parseFloat(UpperValidTick)<parseFloat(nearestTick)){
+          UpperValidTick=nearestTick;
+        }
 
         let UpperSqrtX96Valid = await tickMathInst.getSqrtRatioAtTick(
           UpperValidTick.toString()
