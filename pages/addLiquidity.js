@@ -290,7 +290,16 @@ export default function Addliquidity() {
           _tickSpacing
         );
         if(parseFloat(lowerValidTick)>parseFloat(nearestTick)){
-          lowerValidTick=nearestTick;
+          let found=false
+let validTick;
+          for(let i=1;!found;i++){
+            validTick=lowerValidTick-(i*_tickSpacing)
+           
+            if(Math.trunc(validTick /(_tickSpacing)) % 2 == 0){
+              found=true;
+            }
+          }
+      lowerValidTick=validTick
         }
 
         let lowerValidSqrtPrice = await tickMathInst.getSqrtRatioAtTick(
